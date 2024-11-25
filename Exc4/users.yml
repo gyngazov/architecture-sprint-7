@@ -1,0 +1,24 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: prop-devel
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: reader1
+  namespace: prop-devel
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: editor1
+  namespace: prop-devel
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: admin1
+  namespace: prop-devel
+
