@@ -1,0 +1,64 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: back-from-front
+spec:
+  podSelector:
+    matchLabels:
+      role: backend
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+      - podSelector:
+          matchLabels:
+            role: frontend
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: front-to-back
+spec:
+  podSelector:
+    matchLabels:
+      role: frontend
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          role: backend
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: admin-back-from-front
+spec:
+  podSelector:
+    matchLabels:
+      role: admin-backend
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+      - podSelector:
+          matchLabels:
+            role: admin-frontend
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: admin-front-to-back
+spec:
+  podSelector:
+    matchLabels:
+      role: admin-frontend
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          role: admin-backend
